@@ -21,3 +21,13 @@
 #annie {
     font-size: 28px;
 }
+
+#title {
+    font-size: 56px;
+    color: #111; 
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: bold; 
+    letter-spacing: -1px; 
+    line-height: 1; 
+    text-align: center;
+}
