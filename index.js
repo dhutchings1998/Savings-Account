@@ -1,12 +1,13 @@
 const provider = new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/543af9f56f7042c682b7077a287a2781");
-
 const web3 = new Web3(provider);
 
+// Helper function that rounds numbers
 const round = (number, decimalPlaces) => {
 	const factorOfTen = Math.pow(10, decimalPlaces);
 	return Math.round(number * factorOfTen) / factorOfTen;
 };
 
+// Fetches the current price of Ethereum in USD
 const fetchEthPrice = async () => {
 	const path = "https://rest.coinapi.io/v1/exchangerate/ETH/USD";
 	const res = await fetch(path, { method: "GET", headers: { "X-CoinAPI-Key": "F2BD4749-3396-4875-8A4E-365494D609AB" } });
@@ -14,6 +15,8 @@ const fetchEthPrice = async () => {
 	return priceData["rate"];
 };
 
+// Fetch the balances of Lizzie, Henry and Annie's accounts
+// and updates html
 const fetchAmount = async (ethPrice) => {
 	let balanceLizzie = await web3.eth.getBalance("0x9EB58371498D2179Bc08fF971F3Ef38B53Bbf863");
 	let balanceHenry = await web3.eth.getBalance("0x8243DEda5ea5Ae36FA71B91A0d2d6FA0c74CD032");
@@ -35,6 +38,6 @@ const fetchAmount = async (ethPrice) => {
 fetchEthPrice().then(
 	(price) => fetchAmount(price),
 	(error) => {
-        alert(error)
+        alert(`Error: ${error}`)
     }
 );
